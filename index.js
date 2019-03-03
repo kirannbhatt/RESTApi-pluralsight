@@ -2,21 +2,10 @@ const express = require('express');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const bookRouter = express.Router();
-const Book = require('./models/bookModel');
+const router = require('./routes/apiRouter');
 const db = require('./config/database');
 
-bookRouter.route('/books')
-  .get((req, res) => {
-    Book.find((err, books) => {
-      if (err) {
-        return res.send(err);
-      }
-      return res.json(books);
-    });
-  });
-
-app.use('/api', bookRouter);
+app.use('/', router);
 
 app.get('/', (req, res) => {
   res.send('Hello, theres');
