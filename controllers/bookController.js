@@ -14,4 +14,10 @@ bookController.getBooks = async (req, res) => {
     return res.json(books);
   });
 };
+bookController.addBook = async (req, res) => {
+  const book = await new Book(req.body);
+  book.save();
+  return res.status(201).json(book);
+};
+
 module.exports = bookController;
